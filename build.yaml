@@ -1,0 +1,10 @@
+# ZMK firmware matrix — board must be nice_nano (not nice_nano_v2).
+# Shield budget_corne_* avoids collision with upstream ZMK corne shield.
+---
+include:
+  - board: nice_nano
+    shield: budget_corne_left
+  - board: nice_nano
+    shield: budget_corne_right
+  - board: nice_nano
+    shield: settings_reset
