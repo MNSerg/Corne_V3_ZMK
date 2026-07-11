@@ -13,6 +13,13 @@
 		zmk,underglow = &led_strip;
 	};
 
+	/* nice!nano v2: P0.13 enables VCC rail for WS2812 (required with CONFIG_ZMK_RGB_UNDERGLOW_EXT_POWER) */
+	ext_power {
+		compatible = "zmk,ext-power-generic";
+		control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
+		init-delay-ms = <10>;
+	};
+
 	default_transform: keymap_transform_0 {
 		compatible = "zmk,matrix-transform";
 		columns = <12>;
