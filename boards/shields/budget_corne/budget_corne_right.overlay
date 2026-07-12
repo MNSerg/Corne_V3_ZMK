@@ -25,6 +25,9 @@
 
 &pro_micro_i2c {
 	status = "okay";
+	pinctrl-0 = <&i2c0_default>;
+	pinctrl-1 = <&i2c0_sleep>;
+	pinctrl-names = "default", "sleep";
 
 	pat9125: pat9125@75 {
 		compatible = "pixart,pat912x";
@@ -70,14 +73,4 @@
 
 &trackball_btn_split {
 	device = <&trackball_buttons>;
-};
-
-/ {
-	chosen {
-		zmk,battery = &vbatt;
-	};
-
-	vbatt: vbatt {
-		compatible = "zmk,battery-nrf-vddh";
-	};
 };

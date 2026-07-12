@@ -1,0 +1,4 @@
+/* nice!nano v2 — release D1/P0.06 from UART0 for optional WS2812 later */
+&uart0 {
+	status = "disabled";
+};

@@ -1,21 +1,13 @@
 /*
- * Budget Wireless Corne — matrix, OLED (D2/D3), RGB (D1), status LED (D9).
+ * Budget Wireless Corne — matrix only at boot (RGB/OLED via board + later overlays).
  */
 #include <dt-bindings/zmk/matrix_transform.h>
 #include "budget_corne-layouts.dtsi"
 
 / {
 	chosen {
-		zephyr,display = &oled;
 		zmk,kscan = &kscan0;
 		zmk,physical-layout = &layout_0;
-	};
-
-	/* nice!nano: P0.13 — HIGH cuts VCC, LOW enables WS2812/OLED rail */
-	ext_power {
-		compatible = "zmk,ext-power-generic";
-		control-gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
-		init-delay-ms = <10>;
 	};
 
 	default_transform: keymap_transform_0 {
@@ -43,16 +35,6 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6)  RC(2,7) RC(2,8) RC(2,9
 	};
 };
 
-/* D9 / P1.06 — always on at boot (independent of ZMK) */
-&gpio1 {
-	status_led_boot: status_led_boot {
-		gpio-hog;
-		gpios = <6 GPIO_ACTIVE_HIGH>;
-		output-high;
-		line-name = "status-led-boot";
-	};
-};
-
 &pinctrl {
 	i2c0_default: i2c0_default {
 		group1 {
@@ -71,10 +53,7 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6)  RC(2,7) RC(2,8) RC(2,9
 };
 
 &pro_micro_i2c {
-	status = "okay";
-	pinctrl-0 = <&i2c0_default>;
-	pinctrl-1 = <&i2c0_sleep>;
-	pinctrl-names = "default", "sleep";
+	status = "disabled";
 
 	oled: ssd1306@3c {
 		compatible = "solomon,ssd1306fb";
