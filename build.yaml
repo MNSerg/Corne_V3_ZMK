@@ -1,10 +1,14 @@
 # ZMK firmware matrix — use the ZMK board variant (required on ZMK main / Zephyr 4.1).
 # nice_nano//zmk == nice_nano@2.0.0//zmk (nice!nano v2).
+# artifact-name avoids "//" in auto-generated UF2 filenames on Linux.
 ---
 include:
   - board: nice_nano//zmk
     shield: budget_corne_left
+    artifact-name: budget_corne_left
   - board: nice_nano//zmk
     shield: budget_corne_right
+    artifact-name: budget_corne_right
   - board: nice_nano//zmk
     shield: settings_reset
+    artifact-name: settings_reset
