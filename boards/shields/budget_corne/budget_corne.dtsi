@@ -13,10 +13,10 @@
 		zmk,underglow = &led_strip;
 	};
 
-	/* nice!nano v2: P0.13 enables VCC rail for WS2812 (required with CONFIG_ZMK_RGB_UNDERGLOW_EXT_POWER) */
+	/* nice!nano: P0.13 — HIGH cuts VCC, LOW enables WS2812/OLED rail */
 	ext_power {
 		compatible = "zmk,ext-power-generic";
-		control-gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
+		control-gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		init-delay-ms = <10>;
 	};
 
@@ -43,6 +43,11 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6)  RC(2,7) RC(2,8) RC(2,9
 			, <&pro_micro 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
 			;
 	};
+};
+
+/* D1 / P0.06 is WS2812 data — disable UART0 TX on the same pin */
+&uart0 {
+	status = "disabled";
 };
 
 /* D9 / P1.06 — always on at boot (independent of ZMK) */
